@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>surprise! 🌙</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            margin: 0; padding: 0;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh;
+            background: #fff0f6;
+            font-family: 'Comic Sans MS', cursive;
+            text-align: center;
+        }
+
+        .container { width: 90%; max-width: 450px; }
+
+        .mystery-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .card {
+            width: 150px;
+            height: 200px;
+            background: #ff85a2;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            color: white;
+            font-size: 3rem;
+            transition: transform 0.3s, background 0.5s;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            border: 5px solid white;
+        }
+
+        .card:hover { transform: scale(1.05); }
+
+        /* Revealed States */
+        .revealed { cursor: default; transform: scale(1) !important; }
+        .locked { opacity: 0.5; filter: grayscale(0.8); cursor: not-allowed; }
+
+        #result-area {
+            margin-top: 30px;
+            min-height: 200px;
+        }
+
+        /* Colorful Text Animation */
+        .eid-title {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #ff1493, #00ced1, #ff8c00, #32cd32, #9370db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 400%;
+            animation: move-bg 5s infinite;
+        }
+
+        @keyframes move-bg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .salami-box {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            border: 3px dashed #ffd700;
+        }
+
+        .num-text {
+            font-size: 1.5rem;
+            color: #ff4d6d;
+            background: #fff0f3;
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+	<h2 id="instruction">একটা press কর! ✨</h2>
+        
+        <div class="mystery-grid">
+            <div id="card1" class="card" onclick="choose(1)">?</div>
+            <div id="card2" class="card" onclick="choose(2)">?</div>
+        </div>
+
+        <div id="result-area"></div>
+    </div>
+
+    <script>
+        let choiceMade = false;
+
+        function choose(boxNum) {
+            if (choiceMade) {
+                alert("⛔ NO CHEATING!😂");
+                return;
+            }
+
+            choiceMade = true;
+            const card1 = document.getElementById('card1');
+            const card2 = document.getElementById('card2');
+            const result = document.getElementById('result-area');
+            const instruction = document.getElementById('instruction');
+
+            instruction.innerText = "Look what you got! 😍";
+
+            if (boxNum === 1) {
+                card1.innerHTML = "🎁";
+                card1.style.background = "#4ecdc4";
+                card2.classList.add('locked');
+                
+                result.innerHTML = `
+                    <h1 class="eid-title">ঈদ মোবারক!</h1>
+                    <img src=""eid.jpeg"" alt="Eid Mubarak" style="width: 100%; max-width: 300px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 15px;">
+                    <p> অনেক অনেক দোয়া! 🌙✨</p>
+                `;
+                confetti({ particleCount: 150, spread: 70 });
+            } else {
+                // BOX 2: SALAMI
+                card2.innerHTML = "💵";
+                card2.style.background = "#ffd700";
+                card1.classList.add('locked');
+
+                result.innerHTML = `
+                    <div class="salami-box">
+                        <h2 style="color: #444;">SALAMiii দিয়েন,না দিয়ে কৃপণতার পরিচয় দিবেন না! 💸</h2>
+                      
+                        <div class="num-text" onclick="copyNum()">01725081035</div>
+                        <p><small>(Tap the number to copy)</small></p>
+                    </div>
+                `;
+                confetti({ particleCount: 200, colors: ['#FFD700', '#FFA500'] });
+            }
+        }
+
+        function copyNum() {
+            navigator.clipboard.writeText("01725081035"); // Put your number here
+            alert("Number copied!এখন সালামি দাওও! 🏃‍♂️💨");
+        }
+    </script>
+</body>
+</html>
