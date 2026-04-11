@@ -42,8 +42,6 @@
         }
 
         .card:hover { transform: scale(1.05); }
-
-        /* Revealed States */
         .revealed { cursor: default; transform: scale(1) !important; }
         .locked { opacity: 0.5; filter: grayscale(0.8); cursor: not-allowed; }
 
@@ -51,8 +49,6 @@
             margin-top: 30px;
             min-height: 200px;
         }
-
-        /* Colorful Text Animation */
         .eid-title {
             font-size: 3rem;
             background: linear-gradient(45deg, #ff1493, #00ced1, #ff8c00, #32cd32, #9370db);
@@ -84,70 +80,57 @@
             display: inline-block;
             margin: 10px 0;
         }
-    </style>
+</style>
 </head>
 <body>
-
-    <div class="container">
-	<h2 id="instruction"> যেকোনো একটা press কর! ✨</h2>
-        
-        <div class="mystery-grid">
-            <div id="card1" class="card" onclick="choose(1)">?</div>
-            <div id="card2" class="card" onclick="choose(2)">?</div>
-        </div>
-
-        <div id="result-area"></div>
-    </div>
-
-    <script>
-        let choiceMade = false;
-
-        function choose(boxNum) {
+ <div class="container">
+<h2 id="instruction"> যেকোনো একটা press কর! ✨</h2>
+<div class="mystery-grid">
+<div id="card1" class="card" onclick="choose(1)">?</div>
+<div id="card2" class="card" onclick="choose(2)">?</div>
+ </div>
+<div id="result-area"></div>
+</div>
+<script>
+ let choiceMade = false;
+ function choose(boxNum) {
             if (choiceMade) {
                 alert("⛔ NO CHEATING!😂");
-                return;
-            }
-
-            choiceMade = true;
-            const card1 = document.getElementById('card1');
-            const card2 = document.getElementById('card2');
-            const result = document.getElementById('result-area');
-            const instruction = document.getElementById('instruction');
-
-            instruction.innerText = "Look what you got! 😍";
-
-            if (boxNum === 1) {
-                card1.innerHTML = "🎁";
-                card1.style.background = "#4ecdc4";
-                card2.classList.add('locked');
-                
-                result.innerHTML = `
-                    <h1 class="eid-title">ঈদ মোবারক!</h1>
-					<p> May your prayers be answerd,your heart be filled with gratitude.Taqabbal Allah minna wa minkum salih al'a'mal,wa kull'am wa antum bikhayr!!! 🌙✨</p>
-                `;
-                confetti({ particleCount: 150, spread: 70 });
-            } else {
-                // BOX 2: SALAMI
-                card2.innerHTML = "💵";
-                card2.style.background = "#ffd700";
-                card1.classList.add('locked');
-
-                result.innerHTML = `
-                    <div class="salami-box">
-                        <h2 style="color: #444;">ঈদ এর চাঁদ আকাশে SALAMiii দিয়েন বিকাশে 💸</h2>
-                      
-                        <div class="num-text" onclick="copyNum()">01725081035</div>
-                        <p><small>(Tap the number to copy)</small></p>
-                    </div>
-                `;
-                confetti({ particleCount: 200, colors: ['#FFD700', '#FFA500'] });
-            }
-        }
-
-        function copyNum() {
-            navigator.clipboard.writeText("01725081035"); // Put your number here
-            alert("Number copied!এখন সালামি দাওও! 🏃‍♂️💨");
-        }
-    </script>
+				return;
+			               }
+choiceMade = true;
+const card1 = document.getElementById('card1');
+const card2 = document.getElementById('card2');
+const result = document.getElementById('result-area');
+const instruction = document.getElementById('instruction');
+instruction.innerText = "Look what you got! 😍";
+if (boxNum === 1) {
+card1.innerHTML = "🎁";
+card1.style.background = "#4ecdc4";
+card2.classList.add('locked');
+result.innerHTML = `
+ <h1 class="eid-title">ঈদ মোবারক!</h1>
+<p> May your prayers be answerd,your heart be filled with gratitude.Taqabbal Allah minna wa minkum salih al'a'mal,wa kull'am wa antum bikhayr!!! 🌙✨</p>
+;
+ confetti({ particleCount: 150, spread: 70 });
+} else {
+// BOX 2: SALAMI
+ card2.innerHTML = "💵";
+ card2.style.background = "#ffd700";
+ card1.classList.add('locked');
+ result.innerHTML = `
+<div class="salami-box">
+<h2 style="color: #444;">ঈদ এর চাঁদ আকাশে SALAMiii দিয়েন বিকাশে 💸</h2>
+<div class="num-text" onclick="copyNum()">01725081035</div>
+<p><small>(Tap the number to copy)</small></p>
+</div>
+    ;
+    confetti({ particleCount: 200, colors: ['#FFD700', '#FFA500'] });
+ }
+ }
+function copyNum() {
+    navigator.clipboard.writeText("01725081035"); // Put your number here
+    alert("Number copied!এখন সালামি দাওও! 🏃‍♂️💨"); }
+ </script>
 </body>
 </html>
